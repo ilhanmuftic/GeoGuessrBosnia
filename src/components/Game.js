@@ -17,13 +17,6 @@ const Game = ({ handleGuessSubmit, location }) => {
           }}
         />
       </div>
-      {userGuess && (
-        <div>
-          <h3>Your Guess:</h3>
-          <p>Lat: {userGuess[0]}</p>
-          <p>Lng: {userGuess[1]}</p>
-        </div>
-      )}
     </div>
   );
 };

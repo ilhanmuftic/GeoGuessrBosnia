@@ -50,7 +50,7 @@ const App = () => {
       {!gameOver && location && (
         <Game handleGuessSubmit={handleGuessSubmit} location={location} />
       )}
-      {gameOver && <div>You Won!</div>}
+      {gameOver && <div style={{fontSize: 50}}>You Won!</div>}
     </div>
   );
 };
