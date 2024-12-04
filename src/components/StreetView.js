@@ -1,4 +1,3 @@
-// src/components/StreetView.js
 import React, { useEffect, useState, useRef } from "react";
 
 const StreetView = ({ lat, lng }) => {
@@ -34,6 +33,14 @@ const StreetView = ({ lat, lng }) => {
             position: { lat, lng },
             pov: { heading: 34, pitch: 10 },
             zoom: 1,
+            // Disable default UI elements like the copyright, zoom, and controls
+            disableDefaultUI: true,  // Removes all default UI controls
+            linksControl: false,     // Removes links to Google Maps
+            panControl: false,       // Removes pan control
+            zoomControl: false,      // Removes zoom control
+            fullscreenControl: false, // Removes fullscreen control
+            showRoadLabels: false,   // Hide road labels (optional)
+            addressControl: false,   // Hide address info
           });
           setHasStreetView(true);
         } else {
