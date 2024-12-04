@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Game from "./components/Game";
 import { getRandomLocation } from "./utils/randomLocation";
+import { getDistance } from "./utils/distance";
 
 const App = () => {
   const [location, setLocation] = useState(null);
@@ -12,7 +13,6 @@ const App = () => {
     if (!hasRun.current) {
       setLocation(getRandomLocation()); // Initialize with random location
       hasRun.current = true;
-      console.log("RAN USE EFFECT");
     }
   }, []);
 
@@ -31,19 +31,6 @@ const App = () => {
     }
   };
 
-  const getDistance = (loc1, loc2) => {
-    const R = 6371; // Radius of the Earth in km
-    const dLat = (loc2.lat - loc1.lat) * (Math.PI / 180);
-    const dLng = (loc2.lng - loc1.lng) * (Math.PI / 180);
-    const a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(loc1.lat * (Math.PI / 180)) *
-        Math.cos(loc2.lat * (Math.PI / 180)) *
-        Math.sin(dLng / 2) *
-        Math.sin(dLng / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return R * c; // Distance in km
-  };
 
   return (
     <div>
