@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
 
 const GuessMap = ({ onGuessSubmit }) => {
     const [markerPosition, setMarkerPosition] = useState([43.9159, 17.6791]); // Default Bosnia coords

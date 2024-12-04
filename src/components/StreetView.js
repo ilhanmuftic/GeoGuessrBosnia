@@ -58,6 +58,7 @@ const StreetView = ({ lat, lng }) => {
     return <div>No Street View available at this location.</div>;
   }
 
+
   return <div ref={streetViewRef} style={{ width: "100%", height: "500px" }} />;
 };
 

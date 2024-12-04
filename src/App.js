@@ -1,33 +1,35 @@
 // src/App.js
 import React, { useState, useEffect, useRef } from "react";
-import StreetView from "./components/StreetView";
-import GuessMap from "./components/GuessMap";
+import Game from "./components/Game";
 import { getRandomLocation } from "./utils/randomLocation";
-import 'leaflet/dist/leaflet.css';
-
 
 const App = () => {
   const [location, setLocation] = useState(null);
-  const [userGuess, setUserGuess] = useState(null);
-    const hasRun = useRef(false);
+  const [gameOver, setGameOver] = useState(false); // Correctly handle the gameOver state
+  const hasRun = useRef(false);
 
   useEffect(() => {
     if (!hasRun.current) {
-        setLocation(getRandomLocation());
-        hasRun.current = true;
-        console.log("RAN USE EFFECT")
-
+      setLocation(getRandomLocation()); // Initialize with random location
+      hasRun.current = true;
+      console.log("RAN USE EFFECT");
     }
   }, []);
 
-
   const handleGuessSubmit = (guessCoords) => {
-    console.log('User guessed coordinates:', guessCoords);
-    const [lat, lng] = guessCoords
+    console.log("User guessed coordinates:", guessCoords);
+    const [lat, lng] = guessCoords;
     const distance = getDistance(location, { lat, lng });
+
     alert(`You were ${distance.toFixed(2)} km away!`);
-    setLocation(getRandomLocation());
-};
+
+    const currentLocation = getRandomLocation();
+    if (!currentLocation) {
+      setGameOver(true); // End game when there are no locations left
+    } else {
+      setLocation(currentLocation); // Set new random location for the next guess
+    }
+  };
 
   const getDistance = (loc1, loc2) => {
     const R = 6371; // Radius of the Earth in km
@@ -45,18 +47,10 @@ const App = () => {
 
   return (
     <div>
-      {location && <StreetView lat={location.lat} lng={location.lng} />}
-      <div style={{marginTop: '10px'}}>
-        {<GuessMap onGuessSubmit={handleGuessSubmit}/>}
-        
-      </div>
-      {userGuess && (
-        <div>
-          <h3>Your Guess:</h3>
-          <p>Lat: {userGuess.lat}</p>
-          <p>Lng: {userGuess.lng}</p>
-        </div>
+      {!gameOver && location && (
+        <Game handleGuessSubmit={handleGuessSubmit} location={location} />
       )}
+      {gameOver && <div>You Won!</div>}
     </div>
   );
 };
