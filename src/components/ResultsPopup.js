@@ -31,7 +31,7 @@ const ResultsPopup = ({ show, onClose, guess, actual }) => {
                 </button>
                 <h3>Results</h3>
                 <p>Your Guess: {guess[0]}, {guess[1]}</p>
-                <p>Actual Location: {actual[0].toFixed(4)}, {actual[1].toFixed(4)}</p>
+                <p>Actual Location: {actual[0]}, {actual[1]}</p>
                 <p>Distance: {distance.toFixed(2)} km</p>
                 <p>Score: {score}</p>
                 <div style={styles.map}>

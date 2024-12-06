@@ -20,7 +20,7 @@ const App = () => {
     }
   }, []);
 
-  const handleGuessSubmit = (guessCoords) => {
+  const handleGuessSubmit = async (guessCoords) => {
     console.log("User guessed coordinates:", guessCoords);
     const [lat, lng] = guessCoords;
     const distance = getDistance(location, { lat, lng });
@@ -32,7 +32,7 @@ const App = () => {
 
     console.log("Guess:", lastGuess?.guess);
     console.log("Actual:", lastGuess?.actual);
-    setShowResults(true); // Trigger results popup
+    await setShowResults(true); // Trigger results popup
 
 
     const currentLocation = getRandomLocation();
