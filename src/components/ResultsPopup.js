@@ -4,6 +4,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { getDistance } from "../utils/distance";
 
+
 // Custom icon for map markers
 const locationIcon = new L.Icon({
     iconUrl: '/crosshair.svg', // Replace with your marker image path
@@ -11,33 +12,28 @@ const locationIcon = new L.Icon({
     iconAnchor: [12, 41],
 });
 
-const ResultsPopup = ({ show, onClose, guess, actual }) => {
+const ResultsPopup = ({ show, onClose, guess, actual, score }) => {
     if (!show) return null;
 
     console.log("Guess actual ", guess, actual)
 
-    const distance = getDistance(guess[0], guess[1], actual[0], actual[1]);
-
-
-    // Example scoring system: max 1000 points, losing 1 point per km
-    const maxScore = 1000;
-    const score = Math.max(0, maxScore - Math.floor(distance));
+    const distance = getDistance({lat: guess[0], lng: guess[1]}, actual);  // Find cleaner solution
+    
 
     return (
         <div style={styles.popupContainer}>
             <div style={styles.popup}>
+                {/* TODO Restyle close button */}
                 <button style={styles.closeButton} onClick={onClose}>
                     Close
                 </button>
-                <h3>Results</h3>
-                <p>Your Guess: {guess[0]}, {guess[1]}</p>
-                <p>Actual Location: {actual[0]}, {actual[1]}</p>
-                <p>Distance: {distance.toFixed(2)} km</p>
+                <h3>Distance: {distance.toFixed(2)} km</h3>
                 <p>Score: {score}</p>
                 <div style={styles.map}>
                     <MapContainer center={actual} zoom={7} style={{ height: '100%', width: '100%' }}>
                         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-                        <Marker position={guess} icon={locationIcon} />
+                        {/* Set center of crosshair to these coordinates */}
+                        <Marker position={guess} icon={locationIcon} /> 
                         <Marker position={actual} icon={locationIcon} />
                         <Polyline positions={[guess, actual]} color="red" />
                     </MapContainer>

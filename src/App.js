@@ -25,7 +25,8 @@ const App = () => {
     const [lat, lng] = guessCoords;
     const distance = getDistance(location, { lat, lng });
 
-    const points = distance;
+    const maxScore = 1000;
+    const points = Math.max(0, maxScore - Math.floor(distance));
 
     setScore((prevScore) => prevScore + points);
     setLastGuess({ guess: [lat, lng], actual: location, distance });
