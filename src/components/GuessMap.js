@@ -25,34 +25,37 @@ const GuessMap = ({ onGuessSubmit }) => {
     };
 
     return (
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', paddingLeft: '20px', paddingRight: '20px', maxWidth: '800px', margin: '0 auto' }}>
+        <div >
         {/* Button */}
-        <button
-            onClick={() => onGuessSubmit(markerPosition)}
-            style={{
-                padding: '8px 16px', // Smaller button padding
-                fontSize: '14px',     // Smaller text size
-                marginRight: '20px',  // Reduced margin to keep it close to the map
-                backgroundColor: '#4CAF50', // A nice background color
-                color: 'white',         // White text for contrast
-                border: 'none',         // Remove border
-                borderRadius: '5px',    // Rounded corners
-                cursor: 'pointer',   
-                marginTop: 0,
-                marginBottom: 'auto'   // Add pointer cursor
-            }}
-        >
-            Submit Guess
-        </button>
+ 
     
         {/* Map */}
-        <div style={{ flexGrow: 1, maxWidth: '400px', height: '400px', borderRadius: '8px', overflow: 'hidden' }}>
+        <div style={{ flexGrow: 1, maxWidth: '400px', height: '400px', borderRadius: '8px', marginBottom: 25 }}>
             <MapContainer center={[43.9159, 17.6791]} zoom={7} style={{ height: '100%', width: '100%' }}>
                 <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
                 <MapClickHandler />
                 <Marker position={markerPosition} icon={crosshairIcon} />
             </MapContainer>
         </div>
+
+        <button
+            onClick={() => onGuessSubmit(markerPosition)}
+            style={{
+                padding: '8px 16px', // Smaller button padding
+                fontSize: '14px',     // Smaller text size
+                backgroundColor: 'purple', // A nice background color
+                color: 'white',         // White text for contrast
+                border: 'none',         // Remove border
+                borderRadius: '5px',    // Rounded corners
+                cursor: 'pointer',   
+                marginTop: 0,
+                marginBottom: 'auto',
+                zIndex: 10 ,  // Add pointer cursor
+                marginHorizontal: 'auto'
+            }}
+        >
+            Submit Guess
+        </button>
     </div>
     
 

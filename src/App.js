@@ -52,7 +52,7 @@ const App = () => {
 
 
   return (
-    <div>
+    <div >
       {!gameOver && location && (
         <Game handleGuessSubmit={handleGuessSubmit} location={location} />
       )}
