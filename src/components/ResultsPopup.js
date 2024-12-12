@@ -23,10 +23,6 @@ const ResultsPopup = ({ show, onClose, guess, actual, score }) => {
     return (
         <div style={styles.popupContainer}>
             <div style={styles.popup}>
-                {/* TODO Restyle close button */}
-                <button style={styles.closeButton} onClick={onClose}>
-                    Close
-                </button>
                 <h3>Distance: {distance.toFixed(2)} km</h3>
                 <p>Score: {score}</p>
                 <div style={styles.map}>
@@ -38,7 +34,11 @@ const ResultsPopup = ({ show, onClose, guess, actual, score }) => {
                         <Polyline positions={[guess, actual]} color="red" />
                     </MapContainer>
                 </div>
+                <button style={styles.closeButton} onClick={onClose}>
+                    Close
+                </button>
             </div>
+            
         </div>
     );
 };
@@ -66,14 +66,15 @@ const styles = {
         textAlign: 'center',
     },
     closeButton: {
-        position: 'absolute',
-        top: '10px',
-        right: '10px',
-        background: 'red',
+        background: 'purple',
         color: '#fff',
         border: 'none',
-        borderRadius: '50%',
+        borderRadius: 10,
         cursor: 'pointer',
+        width: '80%',
+        padding: 20,
+        marginTop: '20px',
+        fontSize: "20px"
     },
     map: {
         marginTop: '20px',
