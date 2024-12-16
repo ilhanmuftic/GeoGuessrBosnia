@@ -1,9 +1,12 @@
 // src/App.js
 import React, { useState, useEffect, useRef } from "react";
-import Game from "./components/Game";
 import ResultsPopup from "./components/ResultsPopup";
 import { getRandomLocation } from "./utils/randomLocation";
 import { getDistance } from "./utils/distance";
+import Game from "./components/Game";
+import Navbar from "./components/Navbar";
+import AboutUs from "./components/AboutUs"; 
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 const App = () => {
   const [location, setLocation] = useState(null);
@@ -35,37 +38,46 @@ const App = () => {
     console.log("Actual:", lastGuess?.actual);
     await setShowResults(true); // Trigger results popup
 
-
     const currentLocation = getRandomLocation();
     if (!currentLocation) {
       setGameOver(true); // End game when there are no locations left
     } else {
       setLocation(currentLocation); // Set new random location for the next guess
     }
-
-
   };
 
   const closeResults = () => {
     setShowResults(false);
   };
 
-
   return (
-    <div >
-      {!gameOver && location && (
-        <Game handleGuessSubmit={handleGuessSubmit} location={location} />
-      )}
-      {gameOver && <div style={{fontSize: 50}}>You Won!</div>}
-      <ResultsPopup
-        show={showResults}
-        onClose={closeResults}
-        guess={lastGuess?.guess}
-        actual={lastGuess?.actual}
-        distance={lastGuess?.distance}
-        score={score}
-      />
-    </div>
+    <Router>
+      <Navbar />
+      <Routes>
+        {/* Home/Game Page */}
+        <Route
+          path="/"
+          element={
+            <div>
+              {!gameOver && location && (
+                <Game handleGuessSubmit={handleGuessSubmit} location={location} />
+              )}
+              {gameOver && <div style={{fontSize: 50}}>You Won!</div>}
+              <ResultsPopup
+                show={showResults}
+                onClose={closeResults}
+                guess={lastGuess?.guess}
+                actual={lastGuess?.actual}
+                distance={lastGuess?.distance}
+                score={score}
+              />
+            </div>
+          }
+        />
+        {/* About Us Page */}
+        <Route path="/about" element={<AboutUs />} />
+      </Routes>
+    </Router>
   );
 };
 
