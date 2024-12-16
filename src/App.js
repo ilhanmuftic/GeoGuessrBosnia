@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useState, useEffect, useRef } from "react";
 import ResultsPopup from "./components/ResultsPopup";
 import { getRandomLocation } from "./utils/randomLocation";
@@ -6,11 +5,12 @@ import { getDistance } from "./utils/distance";
 import Game from "./components/Game";
 import Navbar from "./components/Navbar";
 import AboutUs from "./components/AboutUs"; 
+import Account from "./components/Profile"; 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 const App = () => {
   const [location, setLocation] = useState(null);
-  const [gameOver, setGameOver] = useState(false); // Correctly handle the gameOver state
+  const [gameOver, setGameOver] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const [lastGuess, setLastGuess] = useState(null);
   const [score, setScore] = useState(0);
@@ -24,7 +24,6 @@ const App = () => {
   }, []);
 
   const handleGuessSubmit = async (guessCoords) => {
-    console.log("User guessed coordinates:", guessCoords);
     const [lat, lng] = guessCoords;
     const distance = getDistance(location, { lat, lng });
 
@@ -34,15 +33,13 @@ const App = () => {
     setScore((prevScore) => prevScore + points);
     setLastGuess({ guess: [lat, lng], actual: location, distance });
 
-    console.log("Guess:", lastGuess?.guess);
-    console.log("Actual:", lastGuess?.actual);
-    await setShowResults(true); // Trigger results popup
+    setShowResults(true);
 
     const currentLocation = getRandomLocation();
     if (!currentLocation) {
-      setGameOver(true); // End game when there are no locations left
+      setGameOver(true);
     } else {
-      setLocation(currentLocation); // Set new random location for the next guess
+      setLocation(currentLocation);
     }
   };
 
@@ -54,7 +51,6 @@ const App = () => {
     <Router>
       <Navbar />
       <Routes>
-        {/* Home/Game Page */}
         <Route
           path="/"
           element={
@@ -74,8 +70,8 @@ const App = () => {
             </div>
           }
         />
-        {/* About Us Page */}
         <Route path="/about" element={<AboutUs />} />
+        <Route path="/profile" element={<Account />} />  {/* Use the renamed ProfilePage here */}
       </Routes>
     </Router>
   );

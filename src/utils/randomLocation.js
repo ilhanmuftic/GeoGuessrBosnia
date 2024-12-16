@@ -9,11 +9,7 @@ const locations = [
   // Add more locations as needed
   // { lat: 43.9807295, lng: 18.1785632}, // Visoko piramida (ne radi :(  )
   ];
-  
-  export const getLocations = () => {
-    return locations;
-  };
-  
+   
   export const getRandomLocation = () => {
     console.log("Get random location ", locations)
     const randomIndex = Math.floor(Math.random() * locations.length);

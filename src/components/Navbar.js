@@ -1,37 +1,25 @@
-import React, { useState } from "react";
-import { getLocations } from "../utils/randomLocation"; // Import locations
-import "../Navbar.css"; 
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import "../Navbar.css";
 
 const Navbar = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filteredLocations, setFilteredLocations] = useState([]);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  // Handle search input
-  const handleSearchChange = (e) => {
-    const value = e.target.value;
-    setSearchTerm(value);
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
 
-    // Filter locations based on the search term
-    if (value) {
-      const filtered = getLocations().filter((location) =>
-        location.name.toLowerCase().includes(value.toLowerCase())
-      );
-      setFilteredLocations(filtered);
-    } else {
-      setFilteredLocations([]);
-    }
+  const handleLogout = () => {
+    console.log("Logged out!");
+    // Add logout functionality here
   };
 
   return (
     <nav className="navbar">
-      {/* Left Section: Logo and Title (Clickable) */}
+      {/* Left Section: Logo and Title */}
       <div className="navbar-title">
         <a href="/" className="navbar-logo-link">
-          <img
-            src="/favicon.ico"  // Logo from public folder
-            alt="GeoGuessrBosnia Logo"
-            className="navbar-logo"
-          />
+          <img src="/favicon.ico" alt="Logo" className="navbar-logo" />
           GeoGuessrBosnia
         </a>
       </div>
@@ -39,36 +27,47 @@ const Navbar = () => {
       {/* Center Section: Links */}
       <ul className="navbar-links">
         <li>
-        <a href="/about" style={{ color: "#fff", textDecoration: "none" }}> About Us </a>
+          <Link to="/" className="full-box-link">Home</Link>
         </li>
-        <li><a href="#leaderboard" className="unused">Gallery</a></li>
-        <li><a href="#locations"   className="unused">Choose City</a></li>
+        <li>
+          <Link to="/about" className="full-box-link">About Us</Link>
+        </li>
+        <li>
+          <Link to="/" className="full-box-link">Main Menu</Link> 
+        </li> 
       </ul>
 
-      {/* Right Section: Search Box */}
-      <div className="navbar-search">
-        <input
-          type="text"
-          placeholder="Search Locations..."
-          className="search-input"
-          value={searchTerm}
-          onChange={handleSearchChange}
+      {/* Right Section: Profile Dropdown */}
+      <div className="navbar-profile" onClick={toggleMenu}>
+        <img
+          src="/profilepicture.png"
+          alt="Profile"
+          className="profile-icon"
         />
-        {filteredLocations.length > 0 && (
-          <ul className="search-results">
-            {filteredLocations.map((location) => (
-              <li key={location.name}>
-                <a
-                  href={`https://www.google.com/maps?q=${location.lat},${location.lng}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="search-result-box" // Added a new class for styling
-                >
-                  {location.name}
-                </a>
+        {menuOpen && (
+          <div className="profile-dropdown">
+            <div className="dropdown-header">
+              <img
+                src="/profilepicture.png"
+                alt="User"
+                className="dropdown-profile-picture"
+              />
+              <div className="dropdown-username">Otorina</div>
+            </div>
+            <ul className="dropdown-menu">
+              <li>
+                <Link to="/profile ">Account</Link>
               </li>
-            ))}
-          </ul>
+              <li>
+                <Link to="/settings">Settings</Link>
+              </li>
+              
+              <hr />
+              <li onClick={handleLogout}>
+                <a href="#">Log Out</a>
+              </li>
+            </ul>
+          </div>
         )}
       </div>
     </nav>
