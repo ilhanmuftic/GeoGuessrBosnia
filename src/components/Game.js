@@ -7,6 +7,7 @@ const Game = ({ handleGuessSubmit, location }) => {
 
   return (
     <div
+    
       style={{
         display: "flex",
         flexDirection: "row",
@@ -18,6 +19,7 @@ const Game = ({ handleGuessSubmit, location }) => {
         padding: "20px",
         boxSizing: "border-box",
       }}
+      
     >
       {/* TODO ADD TITLE */}
       {/* Left Side: Street View */}
