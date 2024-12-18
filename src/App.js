@@ -55,6 +55,7 @@ const App = () => {
           path="/"
           element={
             <div>
+              
               {!gameOver && location && (
                 <Game handleGuessSubmit={handleGuessSubmit} location={location} />
               )}
