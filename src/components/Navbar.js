@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import "../Navbar.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false); // Profile dropdown
+  const [dropdownOpen, setDropdownOpen] = useState(false); // Bars dropdown
 
   const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
+    setMenuOpen(!menuOpen); // Toggle profile dropdown
+  };
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen); // Toggle bars dropdown
   };
 
   const handleLogout = () => {
@@ -18,11 +25,28 @@ const Navbar = () => {
     <nav className="navbar">
       {/* Left Section: Logo and Title */}
       <div className="navbar-title">
+        <div className = "navbar-icons">
+        <FontAwesomeIcon
+          icon={faBars}
+          className="fa-bars"
+          onClick={toggleDropdown}
+        />
+        </div>
         <a href="/" className="navbar-logo-link">
           <img src="/favicon.ico" alt="Logo" className="navbar-logo" />
-          GeoGuessrBosnia
+          <p className="navbar-name">GeoGuessrBosnia</p>
         </a>
       </div>
+
+      {/* Dropdown Menu for Bars Icon */}
+      {dropdownOpen && (
+        <div className="bars-dropdown">
+          <ul>
+            <li><Link to="/about">About Us</Link></li>
+            <li><Link to="/homescreen">Home Screen</Link></li>
+          </ul>
+        </div>
+      )}
 
       {/* Center Section: Links */}
       <ul className="navbar-links">
@@ -33,8 +57,8 @@ const Navbar = () => {
           <Link to="/about" className="full-box-link">About Us</Link>
         </li>
         <li>
-          <Link to="/" className="full-box-link">Main Menu</Link> 
-        </li> 
+          <Link to="/" className="full-box-link">Main Menu</Link>
+        </li>
       </ul>
 
       {/* Right Section: Profile Dropdown */}
@@ -56,12 +80,11 @@ const Navbar = () => {
             </div>
             <ul className="dropdown-menu">
               <li>
-                <Link to="/profile ">Account</Link>
+                <Link to="/profile">Account</Link>
               </li>
               <li>
                 <Link to="/settings">Settings</Link>
               </li>
-              
               <hr />
               <li onClick={handleLogout}>
                 <a href="#">Log Out</a>
