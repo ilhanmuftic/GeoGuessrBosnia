@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import "../Navbar.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
-import { faHouse } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false); // Profile dropdown
@@ -32,9 +31,6 @@ const Navbar = () => {
           className="fa-bars"
           onClick={toggleDropdown}
         />
-        <Link to="/" className="home-icon-link">
-  <     FontAwesomeIcon icon={faHouse} className="fa-house" />
-        </Link>
         </div>
         <a href="/" className="navbar-logo-link">
           <img src="/favicon.ico" alt="Logo" className="navbar-logo" />

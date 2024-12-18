@@ -12,10 +12,6 @@
   display: none;
 }
 
-.fa-house{
-  display: none;
-}
-
 .bars-dropdown{
   display: none;
 }
@@ -188,6 +184,10 @@
 }
 
 @media only screen and (max-width: 750px) {
+
+  .navbar-name{
+    display: none;
+  }
   
   .navbar-logo-link {
     display: flex;
@@ -219,11 +219,6 @@
     margin-top: 3px;
   }
 
-  .fa-house {
-    display: inline-block !important;
-    color: white;
-  }
-
   .full-box-link {
     display: none;
   }
@@ -236,6 +231,7 @@
   .bars-dropdown {
     display: block;
     position: absolute;
+    padding: 3px;
     top: 50px;
     left: 10px;
     background-color: white;
