@@ -21,7 +21,6 @@ const Game = ({ handleGuessSubmit, location }) => {
       }}
       
     >
-      {/* TODO ADD TITLE */}
       {/* Left Side: Street View */}
       <div
         style={{
