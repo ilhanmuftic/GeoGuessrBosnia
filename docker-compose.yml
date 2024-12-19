@@ -5,6 +5,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    env_file:
+      - .env  
     ports:
       - "3000:3000" # Map port 3000 of the container to port 3000 on your machine
     volumes:

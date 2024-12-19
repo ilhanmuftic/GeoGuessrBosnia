@@ -4,6 +4,7 @@ import GuessMap from "./GuessMap";
 
 const Game = ({ handleGuessSubmit, location }) => {
   const [userGuess, setUserGuess] = useState(null); // Track user's guess
+  console.log("LOCATION", location, location.lat)
 
   return (
     <div

@@ -18,8 +18,14 @@ const App = () => {
   const hasRun = useRef(false);
 
   useEffect(() => {
+
+    const fetchLocation = async () => {
+      const randomLocation = await getRandomLocation(); // Await the result
+      setLocation(randomLocation); // Set it after the promise resolves
+    };
+
     if (!hasRun.current) {
-      setLocation(getRandomLocation()); // Initialize with random location
+      fetchLocation()
       hasRun.current = true;
     }
   }, []);
@@ -35,7 +41,7 @@ const App = () => {
 
     setShowResults(true);
 
-    const currentLocation = getRandomLocation();
+    const currentLocation = await getRandomLocation();
     if (!currentLocation) {
       setGameOver(true);
     } else {
