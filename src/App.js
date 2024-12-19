@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar";
 import AboutUs from "./components/AboutUs"; 
 import Account from "./components/Profile"; 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { calculateScore } from "./utils/score";
 
 const App = () => {
   const [location, setLocation] = useState(null);
@@ -27,8 +28,7 @@ const App = () => {
     const [lat, lng] = guessCoords;
     const distance = getDistance(location, { lat, lng });
 
-    const maxScore = 1000;
-    const points = Math.max(0, maxScore - Math.floor(distance));
+    const points = calculateScore(distance)
 
     setScore((prevScore) => prevScore + points);
     setLastGuess({ guess: [lat, lng], actual: location, distance });
