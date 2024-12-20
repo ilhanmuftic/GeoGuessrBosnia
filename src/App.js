@@ -8,6 +8,10 @@ import AboutUs from "./components/AboutUs";
 import Account from "./components/Profile"; 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { calculateScore } from "./utils/score";
+import PreviewLocation from "./components/PreviewLocation";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // Make sure this is imported!
+
 
 const App = () => {
   const [location, setLocation] = useState(null);
@@ -79,7 +83,12 @@ const App = () => {
         />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/profile" element={<Account />} />  {/* Use the renamed ProfilePage here */}
+        <Route path="/preview" element={<PreviewLocation />} />
       </Routes>
+      <ToastContainer 
+       theme="dark"  // Set the theme to light
+      />
+
     </Router>
   );
 };
