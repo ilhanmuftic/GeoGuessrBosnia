@@ -51,13 +51,13 @@ const Navbar = () => {
       {/* Center Section: Links */}
       <ul className="navbar-links">
         <li>
-          <Link to="/" className="full-box-link">Home</Link>
+          <Link to="/" className="full-box-link">Play</Link>
         </li>
         <li>
           <Link to="/about" className="full-box-link">About Us</Link>
         </li>
         <li>
-          <Link to="/" className="full-box-link">Main Menu</Link>
+          <Link to="/preview" className="full-box-link">Add Location</Link>
         </li>
       </ul>
 
